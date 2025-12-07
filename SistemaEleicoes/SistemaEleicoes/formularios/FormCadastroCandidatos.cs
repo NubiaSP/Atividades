@@ -83,5 +83,31 @@ namespace SistemaEleicoes.formularios
         {
 
         }
+
+        private void txtApelido_Leave(object sender, EventArgs e)
+        {
+            if (txtApelido.Text == "")
+            {
+                MessageBox.Show("O Campo está vazio", "ADS", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtApelido.Select();
+            }
+            else
+            {
+                txtNumCandidato.Select();
+            }
+        }
+
+        private void txtPartido_Leave(object sender, EventArgs e)
+        {
+            if(txtPartido.Text == "")
+            {
+                MessageBox.Show("OCampo está vazio", "ADS", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtPartido.Select();
+            }
+            else
+            {
+                txtNumCandidato.Select();
+            }
+        }
     }
 }

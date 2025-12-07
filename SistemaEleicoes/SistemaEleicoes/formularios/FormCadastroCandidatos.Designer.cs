@@ -90,6 +90,7 @@
             this.txtApelido.Name = "txtApelido";
             this.txtApelido.Size = new System.Drawing.Size(457, 34);
             this.txtApelido.TabIndex = 5;
+            this.txtApelido.Leave += new System.EventHandler(this.txtApelido_Leave);
             // 
             // txtPartido
             // 
@@ -99,6 +100,7 @@
             this.txtPartido.Name = "txtPartido";
             this.txtPartido.Size = new System.Drawing.Size(425, 34);
             this.txtPartido.TabIndex = 6;
+            this.txtPartido.Leave += new System.EventHandler(this.txtPartido_Leave);
             // 
             // txtNumCandidato
             // 
