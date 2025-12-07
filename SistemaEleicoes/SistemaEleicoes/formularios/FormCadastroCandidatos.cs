@@ -15,28 +15,43 @@ namespace SistemaEleicoes.formularios
 {
     public partial class FormCadastroCandidatos : Form
     {
-        
+
         List<ClassCandidatos> candidatos = new List<ClassCandidatos>();
 
         public FormCadastroCandidatos()
         {
             InitializeComponent();
-           
+
         }
+        private bool NumeroExisteNoExcel(string numero)
+        {
+            string caminho = @"C:\\excel\\ListaCandidatos1.xlsx";
+
+            var pasta = new XLWorkbook(caminho);
+            var plan = pasta.Worksheet(1);
+
+            foreach (var item in plan.RowsUsed())
+            {
+                string valor = item.Cell(4).GetValue<string>();
+
+                if (valor == numero)
+                {
+                    return true; 
+                }
+            }
+
+            return false; 
+        }
+
         private void btCadastra_Click(object sender, EventArgs e)
         {
             string numero = txtNumCandidato.Text.Trim();
 
-            bool numeroExistente = candidatos.Any(c => c.NumeroCandidato == numero);
-
-            if (numeroExistente)
+            if (NumeroExisteNoExcel(numero))
             {
-                MessageBox.Show("Este Numero de Canditado já está cadastrado.");
-                return;  
+                MessageBox.Show("Este número de candidato já existe no Excel!");
+                return;
             }
-
-            txtNumCandidato.Clear(); txtApelido.Clear(); txtPartido.Clear(); txtNome.Clear();
-            txtNome.Select();
 
             ClassCandidatos objcandidato = new ClassCandidatos();
             objcandidato.NomeCompleto = txtNome.Text;
@@ -62,6 +77,7 @@ namespace SistemaEleicoes.formularios
             plan.Cell(linhaLivre, 4).Value = objcandidato.NumeroCandidato;
             plan.Cell(linhaLivre, 5).Value = objcandidato.Partido;
 
+        
             pasta.Save();
 
         }
