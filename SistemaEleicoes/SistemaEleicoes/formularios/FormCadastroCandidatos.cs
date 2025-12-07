@@ -23,9 +23,21 @@ namespace SistemaEleicoes.formularios
             InitializeComponent();
            
         }
-
         private void btCadastra_Click(object sender, EventArgs e)
         {
+            string numero = txtNumCandidato.Text.Trim();
+
+            bool numeroExistente = candidatos.Any(c => c.NumeroCandidato == numero);
+
+            if (numeroExistente)
+            {
+                MessageBox.Show("Este Numero de Canditado já está cadastrado.");
+                return;  
+            }
+
+            txtNumCandidato.Clear(); txtApelido.Clear(); txtPartido.Clear(); txtNome.Clear();
+            txtNome.Select();
+
             ClassCandidatos objcandidato = new ClassCandidatos();
             objcandidato.NomeCompleto = txtNome.Text;
             objcandidato.Apelido = txtApelido.Text;
@@ -108,6 +120,21 @@ namespace SistemaEleicoes.formularios
             {
                 txtNumCandidato.Select();
             }
+        }
+
+        private void txtNumCandidato_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtNumCandidato_Layout(object sender, LayoutEventArgs e)
+        {
+            if (txtNumCandidato.Text == "")
+            {
+                MessageBox.Show("O Campo está vazio", "ADS", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtNumCandidato.Select();
+            }
+          
         }
     }
 }
