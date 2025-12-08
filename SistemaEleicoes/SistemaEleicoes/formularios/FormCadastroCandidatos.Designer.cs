@@ -111,6 +111,7 @@
             this.txtNumCandidato.Size = new System.Drawing.Size(345, 34);
             this.txtNumCandidato.TabIndex = 7;
             this.txtNumCandidato.TextChanged += new System.EventHandler(this.txtNumCandidato_TextChanged);
+            this.txtNumCandidato.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtNumCandidato_KeyUp);
             this.txtNumCandidato.Layout += new System.Windows.Forms.LayoutEventHandler(this.txtNumCandidato_Layout);
             // 
             // label4

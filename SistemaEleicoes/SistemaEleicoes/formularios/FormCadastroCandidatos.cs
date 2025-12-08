@@ -52,6 +52,11 @@ namespace SistemaEleicoes.formularios
                 MessageBox.Show("Este número de candidato já existe no Excel!");
                 return;
             }
+            if(txtNumCandidato.Text.Length != 4) 
+            {
+                MessageBox.Show("O campo deve ter exatamente 4 caracteres.");
+                return;
+            }
 
             ClassCandidatos objcandidato = new ClassCandidatos();
             objcandidato.NomeCompleto = txtNome.Text;
@@ -151,6 +156,33 @@ namespace SistemaEleicoes.formularios
                 txtNumCandidato.Select();
             }
           
+        }
+
+        private void txtNumCandidato_KeyUp(object sender, KeyEventArgs e)
+        {
+           bool verificarNumero = false;
+
+            if ((e.KeyCode >= Keys.D0 && e.KeyCode <= Keys.D9) || (e.KeyCode >= Keys.NumPad0 && e.KeyCode <= Keys.NumPad9))
+            { 
+                verificarNumero = true;
+            }
+            else
+            {
+                if (e.KeyCode == Keys.Enter) verificarNumero = true;
+                if (e.KeyCode == Keys.Back) verificarNumero = true;
+                if (e.KeyCode == Keys.Delete) verificarNumero = true;
+                if(e.KeyCode == Keys.Tab) verificarNumero = true;
+                if(e.KeyCode == Keys.Left) verificarNumero = true;
+                if(e.KeyCode == Keys.Right) verificarNumero = true;
+                
+
+            }
+             if (verificarNumero == false)
+            {
+                MessageBox.Show("Somente Numeros", "ADS", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtNumCandidato.Text = txtNumCandidato.Text.Remove(txtNumCandidato.Text.Length - 1);
+            }
+
         }
     }
 }
